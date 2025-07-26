@@ -1,10 +1,12 @@
-# from telegram.ext import ApplicationBuilder, CommandHandler
-# from bot.config import TELEGRAM_TOKEN
-# from bot.handlers import start_handler
+import os
+import asyncio
+from bot.utils import send_notification
+from bot.config import CHAT_ID
 
-# async def main():
-#     app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
-#     app.add_handler(CommandHandler("start", start_handler))
+message = os.getenv("INPUT_MESSAGE")  # GitHub Actions passes inputs as INPUT_<name>
+chat_id = os.getenv("CHAT_ID")
 
-#     print("🔁 Bot polling started.")
-#     await app.run_polling()
+if message and chat_id:
+    asyncio.run(send_notification(message))
+else:
+    print("❌ Missing message or chat ID")
