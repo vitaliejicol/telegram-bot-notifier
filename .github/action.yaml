@@ -1,0 +1,12 @@
+name: 'Telegram Notification Bot'
+description: 'Send Telegram messages from GitHub Actions workflows'
+author: 'Vitalie Jicol'
+inputs:
+  message:
+    description: 'The message to send'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.message }}
